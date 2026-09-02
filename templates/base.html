@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ================= SEO META TAGS START ================= -->
+    <title>Laptop & PC Repair in Ghaziabad & Delhi-NCR | Free Home Pickup</title>
+    <meta name="description" content="Expert laptop, PC, TV, and printer repair services in Ghaziabad and Delhi-NCR by Mahesh Kumar. Chip-level repairing, custom PC builds, and genuine accessories with free doorstep pickup.">
+    <meta name="keywords" content="laptop repair Ghaziabad, computer repair near me, custom PC build, TV repair Ghaziabad, motherboard chip level repair, doorstep laptop repair Delhi NCR, Ghaziabad Laptop Repair">
+    <meta name="author" content="Mahesh Kumar">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (OG) Tags for Social Media -->
+    <meta property="og:title" content="Ghaziabad Laptop Repair | Expert Tech Services">
+    <meta property="og:description" content="Top-rated laptop and PC repair services with free home collection in Delhi-NCR.">
+    <meta property="og:type" content="website">
+    <!-- ================= SEO META TAGS END ================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom Styling -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Manrope', 'Segoe UI', sans-serif; }
+        .bg-primary { background: #0b2344 !important; }
+        .navbar.bg-dark { background: rgba(7, 20, 38, .96) !important; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .navbar-brand { padding: 0; }
+        .navbar .nav-link { font-weight: 600; font-size: .87rem; opacity: .78; margin: 0 .35rem; transition: .2s; }
+        .navbar .nav-link:hover { opacity: 1; color: #5cdbff !important; }
+        .navbar .btn-warning { background: linear-gradient(135deg, #52dcff, #5f92ff); color: #061426; border: 0; border-radius: 9px; padding: .62rem 1rem; }
+
+        /* Dropdown Menu CSS */
+        .dropdown-menu.dark-drop {
+            background: rgba(11, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+        .dropdown-menu.dark-drop .dropdown-item {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: 0.3s;
+        }
+        .dropdown-menu.dark-drop .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #5cdbff;
+            padding-left: 26px;
+        }
+        .dropdown-menu.dark-drop .dropdown-item i { margin-right: 8px; color: #4cddff; }
+
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 30px;
+            background: linear-gradient(135deg, #35df79, #15a850); color: #FFF;
+            border-radius: 50px; text-align: center; font-size: 35px;
+            box-shadow: 0 12px 25px rgba(17, 155, 71, .3); z-index: 1000; transition: 0.3s;
+        }
+        .whatsapp-float:hover { background-color: #1ebe57; color: #fff; transform: scale(1.1); }
+        .whatsapp-icon { margin-top: 13px; }
+
+        footer a.text-white { transition: 0.3s; }
+        footer a.text-white:hover { color: #ffc107 !important; padding-left: 8px; }
+        footer .fs-5:hover { color: #0d6efd !important; transform: scale(1.2); }
+
+        /* GLOSSY FOOTER STYLES */
+        .glossy-footer { position:relative; overflow:hidden; background:radial-gradient(circle at 82% 16%,#145ca2,transparent 25%),linear-gradient(125deg,#061221,#092747 60%,#071526); color:#fff; padding:76px 0 0; }
+        .glossy-footer:before { content:""; position:absolute; inset:0; opacity:.15; background-image:linear-gradient(rgba(132,216,255,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(132,216,255,.22) 1px,transparent 1px); background-size:62px 62px; mask-image:linear-gradient(#000,transparent); }
+        .glossy-footer .container { position:relative; z-index:1; }
+        .footer-intro { padding:25px 0 48px; border-bottom:1px solid rgba(158,224,255,.16); }
+
+        .footer-contact-card { width: fit-content; margin-left: auto; padding:22px 28px; border-radius:16px; background:rgba(255,255,255,.075); border:1px solid rgba(168,225,255,.16); backdrop-filter:blur(13px); }
+        .footer-contact-card b { font-size:.72rem; color:#78e3ff; letter-spacing:.12em; text-transform:uppercase; }
+        .footer-contact-card a { display:block; margin-top:9px; color:#fff; font-weight:800; text-decoration:none; font-size:1rem; }
+        .footer-heading { font-size:.7rem; color:#78e3ff; letter-spacing:.16em; text-transform:uppercase; font-weight:800; margin:0 0 20px; }
+        .footer-link { display:flex; align-items:center; gap:9px; color:#aabed7; text-decoration:none; font-size:.83rem; font-weight:600; margin:0 0 13px; transition:.25s; }
+        .footer-link i { font-size:.55rem; color:#5ddaff; }
+        .footer-link:hover { color:#fff; transform:translateX(4px); }
+        .footer-grid { padding:46px 0; }
+        .contact-line { display:flex; gap:12px; margin:0 0 15px; color:#aac0d9; font-size:.8rem; line-height:1.55; }
+        .contact-line i { color:#63dbff; margin-top:3px; }
+
+        /* Premium Tagline Design */
+        .footer-tagline {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: #e2e8f0;
+            text-transform: uppercase;
+            margin-top: 10px;
+            margin-bottom: 22px;
+            padding-left: 5px;
+        }
+        .footer-tagline span {
+            color: #4cddff;
+            margin: 0 8px;
+            font-size: 0.9rem;
+        }
+
+        .social-link { display:inline-grid; place-items:center; width:38px; height:38px; border:1px solid rgba(163,226,255,.18); border-radius:10px; margin-right:7px; color:#c7e9ff; text-decoration:none; background:rgba(255,255,255,.05); transition:.25s; }
+        .social-link:hover { color:#061426; background:#6de0ff; transform:translateY(-3px); }
+        .footer-bottom { padding:20px 0; background:rgba(0,0,0,.2); border-top:1px solid rgba(162,222,255,.12); color:#829ab9; font-size:.72rem; }
+        .footer-bottom a { color:#79ddff; text-decoration:none; }
+        @media(max-width:991px) { .footer-contact-card { width: 100%; margin-left: 0; margin-top: 22px; } }
+        @media(max-width:767px) { .glossy-footer { padding-top:55px; } .footer-intro { padding-bottom:34px; } }
+
+        /* FLOATING TOAST NOTIFICATIONS */
+        .flash-stack {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 999999;
+            min-width: 300px;
+            max-width: 400px;
+            pointer-events: none;
+        }
+        .flash-stack .alert {
+            pointer-events: auto;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+            animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        .flash-stack .alert .btn-close { margin-left: auto; }
+        @keyframes slideInRight {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-primary text-white py-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <small>
+                <a href="mailto:ghaziabadlaptoprepair@gmail.com" class="text-white text-decoration-none">
+                    <i class="fas fa-envelope"></i> ghaziabadlaptoprepair@gmail.com
+                </a>
+            </small>
+            <div>
+                <!-- CLICK-TO-CALL -->
+                <small class="me-3">
+                    <a href="tel:+919650314444" class="text-white text-decoration-none">
+                        <i class="fas fa-phone-alt"></i> Call: +91-9650314444
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <div class="container">
+            <!-- NAVBAR LOGO IMAGE -->
+            <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Ghaziabad Laptop Repair"
+                     style="height: 48px; object-fit: contain; transition: 0.3s ease; border-radius: 6px;"
+                     onmouseover="this.style.transform='scale(1.05)'"
+                     onmouseout="this.style.transform='scale(1)'">
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about">About Us</a></li>
+
+                    <!-- DROPDOWN MENU -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Services
+                        </a>
+                        <ul class="dropdown-menu dark-drop" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="/service/laptop-repair"><i class="fas fa-laptop-medical"></i> Laptop Repair</a></li>
+                            <li><a class="dropdown-item" href="/service/custom-pc-build"><i class="fas fa-desktop"></i> Custom PC Build</a></li>
+                            <li><a class="dropdown-item" href="/service/chip-level-repairing"><i class="fas fa-microchip"></i> Chip-Level Repairing</a></li>
+                            <li><a class="dropdown-item" href="/service/display-replacement"><i class="fas fa-tablet-alt"></i> Display Replacement</a></li>
+                            <li><a class="dropdown-item" href="/service/tv-repair"><i class="fas fa-tv"></i> LED/LCD TV Repair</a></li>
+                            <li><a class="dropdown-item" href="/service/printer-repair"><i class="fas fa-print"></i> Printer Repair</a></li>
+                            <li><a class="dropdown-item" href="/service/cctv-installation"><i class="fas fa-video"></i> CCTV Installation</a></li>
+                            <li><a class="dropdown-item" href="/service/accessories"><i class="fas fa-keyboard"></i> Accessories</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link text-white" href="/feedback">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact Us</a></li>
+                    <li class="nav-item ms-3 mt-2 mt-lg-0"><a class="btn btn-warning fw-bold" href="/contact">Book Repair</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content Area -->
+    <div>
+        <!-- FLOATING NOTIFICATIONS -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-stack">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                    {% if category == 'error' %}
+                        <i class="fas fa-circle-exclamation fs-5 me-2"></i>
+                    {% else %}
+                        <i class="fas fa-check-circle fs-5 me-2"></i>
+                    {% endif %}
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Glossy Footer -->
+    <footer class="glossy-footer">
+        <div class="container">
+
+            <div class="footer-intro row align-items-center">
+                <div class="col-lg-7">
+                    <!-- FOOTER LOGO IMAGE -->
+                    <a href="/" style="display: block; margin-bottom: 0;">
+                        <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Ghaziabad Laptop Repair"
+                             style="height: 65px; object-fit: contain; transition: 0.3s ease; border-radius: 8px;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                    </a>
+
+                    <!-- NEW PREMIUM TAGLINE -->
+                    <div class="footer-tagline">
+                        REPAIR <span>•</span> UPGRADE <span>•</span> SUPPORT
+                    </div>
+
+                    <div>
+                        <a class="social-link" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-link" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="social-link" href="https://wa.me/919650314444" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 ms-lg-auto">
+                    <div class="footer-contact-card">
+                        <b>Need a quick repair?</b>
+                        <a href="tel:+919650314444"><i class="fas fa-phone-volume text-info me-2"></i>+91 96503 14444</a>
+                        <span class="small text-white-50">Call us Tue–Sun, 10 AM–8 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-grid row g-5">
+                <div class="col-6 col-md-3">
+                    <h3 class="footer-heading">Explore</h3>
+                    <a class="footer-link" href="/"><i class="fas fa-chevron-right"></i>Home</a>
+                    <a class="footer-link" href="/about"><i class="fas fa-chevron-right"></i>About us</a>
+                    <a class="footer-link" href="/contact"><i class="fas fa-chevron-right"></i>Book repair</a>
+                    <a class="footer-link" href="/feedback"><i class="fas fa-chevron-right"></i>Feedback</a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3 class="footer-heading">Services</h3>
+                    <a class="footer-link" href="/service/laptop-repair"><i class="fas fa-chevron-right"></i>Laptop repair</a>
+                    <a class="footer-link" href="/service/custom-pc-build"><i class="fas fa-chevron-right"></i>Custom PC build</a>
+                    <a class="footer-link" href="/service/chip-level-repairing"><i class="fas fa-chevron-right"></i>Chip-level repair</a>
+                    <a class="footer-link" href="/service/display-replacement"><i class="fas fa-chevron-right"></i>Display replacement</a>
+                </div>
+
+                <div class="col-md-5 ms-md-auto">
+                    <h3 class="footer-heading">Visit or contact us</h3>
+                    <div class="contact-line">
+                        <i class="fas fa-location-dot"></i>
+                        <span>H.No.43, Radha Krishna enclave, Shahpur Bamheta, Ghaziabad, Uttar Pradesh 201002</span>
+                    </div>
+                    <div class="contact-line">
+                        <i class="fas fa-envelope"></i>
+                        <a class="text-decoration-none text-white" href="mailto:ghaziabadlaptoprepair@gmail.com">ghaziabadlaptoprepair@gmail.com</a>
+                    </div>
+                    <div class="contact-line">
+                        <i class="fas fa-clock"></i>
+                        <span>Tuesday – Sunday · 10:00 AM – 8:00 PM</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container d-flex flex-column flex-md-row gap-2 justify-content-between">
+                <span>© 2026 Ghaziabad Laptop Repair. All rights reserved.</span>
+                <span>Built with care by <a href="/">Manish Prajapati</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed WhatsApp Number -->
+    <a href="https://wa.me/919650314444?text=Hello Ghaziabad Laptop Repair, I need help with my device!" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Auto-Dismiss Script for Notifications -->
+    <script>
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.flash-stack .alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 4000);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .feedback-page {
+        background: #f5f9ff;
+        min-height: calc(100vh - 120px);
+        overflow: hidden;
+    }
+
+    .feedback-hero {
+        position: relative;
+        isolation: isolate;
+        padding: 100px 0 155px;
+        background: radial-gradient(circle at 78% 28%, #216ec0, transparent 26%), linear-gradient(125deg, #071426, #0b315e);
+        color: #fff;
+    }
+
+    .feedback-hero:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: .24;
+        background-image: linear-gradient(rgba(146, 221, 255, .17) 1px, transparent 1px), linear-gradient(90deg, rgba(146, 221, 255, .17) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: linear-gradient(#000, transparent);
+    }
+
+    .feedback-kicker {
+        color: #87e6ff;
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+    }
+
+    .feedback-hero h1 {
+        font-size: clamp(2.7rem, 5vw, 4.6rem);
+        font-weight: 800;
+        letter-spacing: -.06em;
+        margin: 15px 0;
+    }
+
+    .feedback-hero p {
+        max-width: 535px;
+        color: #b7c9e1;
+        font-size: 1.05rem;
+        line-height: 1.75;
+    }
+
+    .feedback-orb {
+        position: absolute;
+        right: 10%;
+        top: 42px;
+        width: 220px;
+        height: 220px;
+        border: 1px solid rgba(144, 224, 255, .22);
+        border-radius: 50%;
+        box-shadow: 0 0 0 30px rgba(107, 201, 255, .05), 0 0 0 60px rgba(107, 201, 255, .035);
+    }
+
+    .feedback-wrap {
+        margin-top: -85px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feedback-card {
+        background: #fff;
+        border: 1px solid #dce9f7;
+        border-radius: 24px;
+        box-shadow: 0 28px 65px rgba(15, 58, 109, .14);
+        overflow: hidden;
+    }
+
+    .form-aside {
+        padding: 42px 35px;
+        background: linear-gradient(145deg, #0f315d, #0b203d);
+        color: #fff;
+    }
+
+    .form-aside h2 {
+        font-weight: 800;
+        letter-spacing: -.045em;
+        font-size: 1.55rem;
+    }
+
+    .form-aside p {
+        color: #acc1dd;
+        font-size: .88rem;
+        line-height: 1.7;
+    }
+
+    .feedback-point {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        border-top: 1px solid rgba(255, 255, 255, .1);
+        padding: 15px 0;
+        color: #c9d9ed;
+        font-size: .78rem;
+        font-weight: 700;
+    }
+
+    .feedback-point i {
+        color: #70dcff;
+    }
+
+    .form-content {
+        padding: 42px;
+    }
+
+    .form-content h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -.045em;
+    }
+
+    .form-content > p {
+        color: #7185a1;
+        font-size: .87rem;
+    }
+
+    .rating-box {
+        margin: 30px 0;
+        padding: 21px;
+        border: 1px solid #dae8f5;
+        border-radius: 16px;
+        background: #f8fbff;
+        text-align: center;
+    }
+
+    .rating-label {
+        font-size: .72rem;
+        color: #4d6482;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: .12em;
+        margin-bottom: 12px;
+    }
+
+    .rating-wrapper {
+        display: inline-flex;
+        flex-direction: row-reverse;
+    }
+
+    .rating-wrapper input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .rating-wrapper label {
+        font-size: 2.25rem;
+        color: #d5e1ee;
+        cursor: pointer;
+        padding: 0 4px;
+        transition: .2s;
+    }
+
+    .rating-wrapper input:checked ~ label,
+    .rating-wrapper label:hover,
+    .rating-wrapper label:hover ~ label {
+        color: #ffbd35;
+        transform: translateY(-2px);
+    }
+
+    .rating-note {
+        height: 18px;
+        color: #6d84a2;
+        font-size: .72rem;
+        font-weight: 700;
+        margin-top: 7px;
+    }
+
+    .field-label {
+        font-size: .72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        color: #445d7e;
+        margin-bottom: 8px;
+    }
+
+    .field-wrap {
+        position: relative;
+    }
+
+    .field-wrap i {
+        position: absolute;
+        left: 14px;
+        top: 15px;
+        color: #5586c6;
+    }
+
+    .field-wrap textarea + i {
+        top: 16px;
+    }
+
+    .feedback-input {
+        border: 1px solid #d7e3ef;
+        border-radius: 11px;
+        padding: 13px 14px 13px 40px;
+        font-size: .88rem;
+        box-shadow: none;
+    }
+
+    .feedback-input:focus {
+        border-color: #4caeff;
+        box-shadow: 0 0 0 4px rgba(67, 160, 255, .12);
+    }
+
+    textarea.feedback-input {
+        min-height: 132px;
+        resize: vertical;
+    }
+
+    .feedback-submit {
+        border: 0;
+        border-radius: 12px;
+        padding: 14px;
+        background: linear-gradient(135deg, #51ddff, #4d84ff);
+        color: #061426;
+        font-size: .9rem;
+        font-weight: 800;
+        box-shadow: 0 13px 25px rgba(51, 145, 255, .23);
+        transition: .25s;
+    }
+
+    .feedback-submit:hover {
+        transform: translateY(-2px);
+        color: #061426;
+    }
+
+    .privacy-note {
+        margin: 18px 0 0;
+        color: #7890ad;
+        font-size: .7rem;
+        text-align: center;
+    }
+
+    .privacy-note i {
+        color: #38b86f;
+    }
+
+    .feedback-foot {
+        padding: 60px 0;
+        text-align: center;
+        color: #7d92ac;
+        font-size: .8rem;
+    }
+
+    @media(max-width:991px) {
+        .feedback-hero { padding: 70px 0 135px; }
+        .feedback-orb { display: none; }
+        .form-aside { padding: 30px; }
+        .form-content { padding: 30px; }
+    }
+
+    @media(max-width:575px) {
+        .feedback-hero { padding: 60px 0 120px; }
+        .feedback-wrap { margin-top: -65px; }
+        .form-content, .form-aside { padding: 25px; }
+        .rating-wrapper label { font-size: 2rem; }
+    }
+</style>
+
+<main class="feedback-page">
+    <section class="feedback-hero">
+        <div class="feedback-orb"></div>
+        <div class="container">
+            <span class="feedback-kicker"><i class="fas fa-sparkles me-2"></i>Your voice matters</span>
+            <h1>How was your<br>repair experience?</h1>
+            <p>Your feedback helps us improve every diagnosis, every repair, and every customer interaction.</p>
+        </div>
+    </section>
+
+    <section class="container feedback-wrap">
+        <div class="feedback-card">
+            <div class="row g-0">
+                <aside class="col-lg-4 form-aside">
+
+                    <!-- NEW LOGO IMAGE INSTEAD OF BLANK BOX -->
+                    <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Ghaziabad Laptop Repair" style="height: 56px; object-fit: contain; margin-bottom: 26px; border-radius: 8px;">
+
+                    <h2>Built on trust.</h2>
+                    <p>We read every review and use it to make Ghaziabad Laptop Repair better for you.</p>
+                    <div class="mt-4">
+                        <div class="feedback-point"><i class="fas fa-circle-check"></i> Takes less than a minute</div>
+                        <div class="feedback-point"><i class="fas fa-shield-heart"></i> Your feedback is valued</div>
+                        <div class="feedback-point"><i class="fas fa-star"></i> Shared on our homepage</div>
+                    </div>
+                </aside>
+
+                <div class="col-lg-8 form-content">
+                    <h2>Share your feedback</h2>
+                    <p>Tell us what went well and how we can improve.</p>
+
+                    <form action="/feedback" method="POST" class="mt-2">
+                        {{ csrf_field() }}
+
+                        <div class="rating-box">
+                            <div class="rating-label">Your overall rating</div>
+                            <div class="rating-wrapper">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" class="fas fa-star" aria-label="5 stars"></label>
+
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" class="fas fa-star" aria-label="4 stars"></label>
+
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" class="fas fa-star" aria-label="3 stars"></label>
+
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" class="fas fa-star" aria-label="2 stars"></label>
+
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" class="fas fa-star" aria-label="1 star"></label>
+                            </div>
+                            <div class="rating-note" id="ratingNote">Select a rating</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="field-label" for="customer_name">Your name</label>
+                            <div class="field-wrap">
+                                <i class="fas fa-user"></i>
+                                <input id="customer_name" type="text" class="form-control feedback-input" name="customer_name" placeholder="Enter your full name" required autocomplete="name" pattern="^[A-Za-z\s]{3,50}$" title="Use 3–50 letters and spaces">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="field-label" for="review">Your review</label>
+                            <div class="field-wrap">
+                                <i class="fas fa-message"></i>
+                                <textarea id="review" class="form-control feedback-input" name="review" placeholder="Tell us about the repair quality, speed and your experience…" required minlength="10" maxlength="1200"></textarea>
+                            </div>
+                        </div>
+
+                        <button class="feedback-submit w-100" type="submit">
+                            <i class="fas fa-paper-plane me-2"></i>Submit my feedback
+                        </button>
+
+                        <p class="privacy-note"><i class="fas fa-lock me-1"></i>Your details are only used to display your review.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="feedback-foot">Thank you for helping us deliver better tech care.</div>
+</main>
+
+<script>
+    const note = document.getElementById('ratingNote');
+    const labels = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
+    document.querySelectorAll('input[name="rating"]').forEach(el => {
+        el.addEventListener('change', () => {
+            note.textContent = labels[el.value] + ' — thank you!';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* PROFESSIONAL COMPACT CONTACT UI            */
+    .contact-header {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        padding: 35px 0;
+        text-align: center;
+        border-bottom: 4px solid #38bdf8;
+    }
+    .contact-card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        background: #fff;
+    }
+
+    /* Contact Info Boxes */
+    .info-box {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        background: #f8fafc;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        transition: 0.3s;
+        border: 1px solid #e2e8f0;
+    }
+    .info-box:hover {
+        transform: translateX(5px);
+        border-color: #3b82f6;
+        box-shadow: 0 4px 12px rgba(59,130,246,0.1);
+    }
+    .info-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    .info-text h6 { margin: 0; font-weight: 700; font-size: 0.85rem; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px;}
+    .info-text p { margin: 0; font-size: 0.85rem; color: #64748b; font-weight: 500;}
+
+    /* Compact Form Styles */
+    .form-label { font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;}
+    .custom-input {
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        border: 1px solid #cbd5e1;
+        background-color: #f8fafc;
+        color: #1e293b;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+    .custom-input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        background-color: #fff;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    }
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        color: white;
+    }
+</style>
+
+<!-- TOP BANNER -->
+<div class="contact-header mb-5">
+    <div class="container">
+        <h3 class="fw-bold mb-2"><i class="fas fa-headset text-info me-2"></i> Contact & Book Repair</h3>
+        <p class="text-white-50 mb-0 small">Fill out the form below or visit our store. We're here to help!</p>
+    </div>
+</div>
+
+<div class="container mb-5 pb-4">
+    <div class="row g-4">
+
+
+        <!-- LEFT SIDE: CONTACT INFO & MAP              -->
+        <div class="col-lg-5">
+            <div class="contact-card p-4 h-100">
+                <h6 class="fw-bold mb-3" style="color: #0f172a; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">Get in Touch</h6>
+
+                <div class="info-box">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h6>Store Location</h6>
+                        <p>H.No.43, Radha Krishna enclave, Shahpur Bamheta, Ghaziabad, Uttar Pradesh 201002</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <h6>Call Us</h6>
+                        <p>+91-9650314444</p>
+                    </div>
+                </div>
+
+                <div class="info-box mb-4">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h6>Email Support</h6>
+                        <p>ghaziabadlaptoprepair@gmail.com</p>
+                    </div>
+                </div>
+
+                <!-- COMPACT GOOGLE MAP (Width Fixed for Mobile) -->
+                <h6 class="fw-bold mb-2 mt-4" style="color: #0f172a;">Locate Us</h6>
+                <div style="border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1750.6849529014557!2d77.47008783967284!3d28.6486409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf34e7791dced%3A0x4deabd4f9d66e9bc!2sGhaziabad%20Laptop%20Repair!5e0!3m2!1sen!2sin!4v1787652967278!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- RIGHT SIDE: COMPACT BOOKING FORM           -->
+        <div class="col-lg-7">
+            <div class="contact-card p-4 p-md-5 h-100">
+                <h5 class="fw-bold mb-1" style="color: #0f172a;">Book a Service</h5>
+                <p class="text-muted small mb-4">Our expert technicians will get back to you shortly.</p>
+
+                <form action="/contact" method="POST">
+                    {{ csrf_field() }}
+                    <div class="row g-3"> <!-- g-3 makes gaps compact -->
+
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control custom-input" name="name" placeholder="E.g. Manish Prajapati" required autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control custom-input" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Device Type</label>
+                            <select class="form-select custom-input" name="device" required>
+                                <option value="" selected disabled>Select device...</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Desktop PC">Desktop PC</option>
+                                <option value="Smart TV">LED / Smart TV</option>
+                                <option value="Printer">Printer</option>
+                                <option value="CCTV">CCTV Camera</option>
+                                <option value="Other">Other Accessories</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Service Mode</label>
+                            <select class="form-select custom-input" name="serviceMode" required>
+                                <option value="Store Visit" selected>Store Visit (I will come)</option>
+                                <option value="Home Pickup">Home Pickup (Please collect)</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Full Address (For Pickup/Invoice)</label>
+                            <input type="text" class="form-control custom-input" name="address" placeholder="House/Shop No, Street, City" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Describe the Problem</label>
+                            <!-- Rows reduced to 3 for compact look -->
+                            <textarea class="form-control custom-input" name="problem" rows="3" placeholder="E.g. Screen is broken, PC not turning on, etc." required></textarea>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-submit w-100">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Service Request
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

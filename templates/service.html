@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* ========================================== */
+    /* SERVICE DETAIL HERO SECTION                */
+    /* ========================================== */
+    .service-detail-hero {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 64, 175, 0.85)), url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        padding: 100px 0;
+        color: white;
+        text-align: center;
+        border-bottom: 4px solid #38bdf8;
+    }
+    .service-icon-big {
+        font-size: 4.5rem;
+        color: #38bdf8;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.5));
+        animation: bounceIn 1s ease;
+    }
+    .service-detail-hero h1 { font-weight: 800; font-size: 3.5rem; margin-bottom: 15px; letter-spacing: 1px; }
+    .service-detail-hero p { font-size: 1.2rem; color: #cbd5e1; font-weight: 400; max-width: 700px; margin: 0 auto; }
+
+    @keyframes bounceIn {
+        0% { transform: translateY(-30px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ========================================== */
+    /* MAIN CONTENT AREA WITH SOFT GRADIENT       */
+    /* ========================================== */
+    .detail-section-wrapper {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        padding: 80px 0;
+        min-height: 500px;
+    }
+
+    /* ========================================== */
+    /* LEFT SIDE: FROSTED GLASS DETAIL CARD       */
+    /* ========================================== */
+    .glass-detail-card {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 24px;
+        padding: 45px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+    .detail-title { font-weight: 800; color: #0f172a; margin-bottom: 25px; font-size: 2.2rem; }
+    .detail-text { font-size: 1.15rem; color: #475569; line-height: 1.8; margin-bottom: 30px; }
+
+    /* DYNAMIC FEATURE LIST */
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+    .feature-list li {
+        font-size: 1.1rem; color: #1e293b; margin-bottom: 18px; font-weight: 600;
+        display: flex; align-items: flex-start; /* Changed to flex-start for multiline text */
+        background: rgba(255,255,255,0.6);
+        padding: 16px 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .feature-list i { color: #10b981; font-size: 1.4rem; margin-right: 15px; margin-top: 3px; }
+
+    /* ========================================== */
+    /* RIGHT SIDE: DARK NAVY GLASS BOOKING CARD   */
+    /* ========================================== */
+    .glass-booking-card {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.8));
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 40px 30px;
+        text-align: center; color: white;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        position: sticky; top: 100px;
+    }
+    .glass-booking-card h4 { font-weight: 800; margin-bottom: 15px; color: #38bdf8;}
+    .glass-booking-card p { font-size: 1rem; color: #cbd5e1; margin-bottom: 30px; line-height: 1.6;}
+
+    .btn-glass-book {
+        background: linear-gradient(135deg, #38bdf8, #2563eb);
+        color: #fff; font-weight: 700; width: 100%; padding: 15px;
+        border-radius: 12px; font-size: 1.15rem; text-decoration: none; display: block;
+        transition: 0.3s ease; box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+        letter-spacing: 0.5px;
+    }
+    .btn-glass-book:hover { transform: translateY(-3px); color: #fff; box-shadow: 0 12px 30px rgba(37,99,235,0.5); }
+</style>
+
+<!-- HERO SECTION -->
+<section class="service-detail-hero">
+    <div class="container">
+        <i class="{{ service.icon }} service-icon-big"></i>
+        <h1>{{ service.name }}</h1>
+        <p>{{ service.desc }}</p>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="detail-section-wrapper">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- LEFT: GLASS DETAIL CARD -->
+            <div class="col-lg-8">
+                <div class="glass-detail-card h-100">
+                    <h2 class="detail-title">About This Service</h2>
+                    <div style="height: 4px; width: 60px; background: #38bdf8; margin-bottom: 25px; border-radius: 10px;"></div>
+
+                    <p class="detail-text">{{ service.details }}</p>
+
+                    <h4 class="fw-bold mt-5 mb-4 text-dark" style="font-size: 1.5rem;">What's Included?</h4>
+                    <ul class="feature-list">
+                        <!-- YAHAN PYTHON LOOP LAGA DIYA HAI -->
+                        {% for feature in service.features %}
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <span style="color: #0f172a; font-weight: 800; display: block; margin-bottom: 3px;">{{ feature.title }}</span>
+                                <span style="font-size: 0.95rem; color: #475569; font-weight: 500; line-height: 1.4; display: block;">{{ feature.text }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RIGHT: DARK GLASS BOOKING CARD -->
+            <div class="col-lg-4">
+                <div class="glass-booking-card">
+                    <div class="mb-4">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(56, 189, 248, 0.1); display: inline-flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #38bdf8; margin: 0 auto; box-shadow: 0 0 20px rgba(56,189,248,0.2);">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                    </div>
+                    <h4>Need {{ service.name }}?</h4>
+                    <p>Our expert technicians are ready to fix your device. Book a service today and get it resolved quickly.</p>
+                    <a href="/contact" class="btn-glass-book"><i class="fas fa-calendar-check me-2"></i> Book Service Now</a>
+                    <p class="mt-4 mb-0 small text-white-50"><i class="fas fa-phone-alt me-2"></i>Or call us at <strong class="text-white">+91-9650314444</strong></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

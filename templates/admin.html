@@ -1,0 +1,710 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    /* Hide default website headers and footers for the Admin Dashboard */
+    footer, .navbar, .bg-primary.py-2, .whatsapp-float {
+        display: none !important;
+    }
+
+    /* Admin Dashboard Main Background */
+    .admin-shell {
+        min-height: 100vh;
+        background: #071426;
+        color: #eaf2ff;
+        font-family: 'Manrope', 'Segoe UI', sans-serif;
+    }
+
+    /* Sidebar Styling */
+    .admin-sidebar {
+        width: 260px;
+        position: fixed;
+        inset: 0 auto 0 0;
+        padding: 30px 18px;
+        background: linear-gradient(180deg, #0c2344, #061426);
+        border-right: 1px solid rgba(159, 214, 255, .1);
+        z-index: 3;
+    }
+
+    .admin-brand {
+        font-size: 1.08rem;
+        font-weight: 800;
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin: 0 10px 48px;
+    }
+
+    .admin-brand i {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #58e0ff, #4982ff);
+        color: #061426;
+        border-radius: 11px;
+    }
+
+    .side-label {
+        font-size: .65rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: #6983a7;
+        margin: 0 12px 10px;
+        display: block;
+    }
+
+    .side-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #9db3d1;
+        text-decoration: none;
+        border-radius: 11px;
+        padding: 12px;
+        margin: 4px 0;
+        font-size: .85rem;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .side-link.active, .side-link:hover {
+        background: rgba(104, 202, 255, .11);
+        color: #77e3ff;
+    }
+
+    .side-link i {
+        width: 17px;
+    }
+
+    /* Main Content Area */
+    .admin-main {
+        margin-left: 260px;
+        padding: 32px;
+        max-width: 1700px;
+    }
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+
+    .topbar h1 {
+        font-weight: 800;
+        font-size: clamp(1.75rem, 3vw, 2.4rem);
+        letter-spacing: -.055em;
+        margin: 0;
+    }
+
+    .topbar p {
+        color: #8fa7c7;
+        font-size: .85rem;
+        margin: 7px 0 0;
+    }
+
+    /* Profile Section */
+    .profile-area {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 7px 9px 7px 7px;
+        background: #0d2340;
+        border: 1px solid rgba(141, 205, 255, .15);
+        border-radius: 14px;
+    }
+
+    .admin-dp {
+        width: 42px;
+        height: 42px;
+        object-fit: cover;
+        border-radius: 11px;
+        background: #153d6c;
+        border: 1px solid #4bdcff;
+    }
+
+    .profile-area strong {
+        font-size: .8rem;
+        display: block;
+    }
+
+    .profile-area span {
+        color: #6fe1a5;
+        font-size: .67rem;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, .12);
+        color: #c4d5e9;
+        transition: 0.3s;
+    }
+
+    .icon-btn:hover {
+        background: #17385d;
+    }
+
+    .logout {
+        color: #ff9fa7;
+        border-color: rgba(255, 108, 122, .28);
+    }
+
+    .logout:hover {
+        background: #e84b59;
+        color: white;
+    }
+
+    /* Metric Cards */
+    .metric-card {
+        height: 100%;
+        background: linear-gradient(145deg, #102b4d, #0b1e38);
+        border: 1px solid rgba(147, 209, 255, .12);
+        border-radius: 18px;
+        padding: 23px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .metric-card:after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        right: -43px;
+        bottom: -58px;
+        border-radius: 50%;
+        background: var(--glow);
+        opacity: .2;
+    }
+
+    .metric-icon {
+        width: 43px;
+        height: 43px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--icon);
+        color: var(--color);
+        font-size: 1.12rem;
+    }
+
+    .metric-card small {
+        display: block;
+        color: #819ab9;
+        font-size: .69rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        margin-top: 20px;
+    }
+
+    .metric-card strong {
+        font-size: 2rem;
+        color: #fff;
+        letter-spacing: -.06em;
+    }
+
+    .metric-card .detail {
+        color: #6fe1a5;
+        font-size: .72rem;
+        font-weight: 700;
+        margin-left: 8px;
+    }
+
+    /* Workspace & Tables */
+    .workspace {
+        background: #0b1e37;
+        border: 1px solid rgba(147, 209, 255, .12);
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 26px;
+    }
+
+    .workspace-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 22px;
+    }
+
+    .workspace-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .workspace-sub {
+        color: #8098b7;
+        font-size: .77rem;
+        margin: 5px 0 0;
+    }
+
+    .search-box {
+        position: relative;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 12px;
+        top: 11px;
+        color: #7290b7;
+        font-size: .75rem;
+    }
+
+    .search-box input {
+        width: 230px;
+        padding: 10px 12px 10px 31px;
+        background: #07182d;
+        border: 1px solid rgba(147, 209, 255, .14);
+        color: #eaf2ff;
+        border-radius: 10px;
+        font-size: .77rem;
+        outline: none;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .data-table th {
+        color: #718aaa;
+        font-size: .64rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: 0 12px 13px;
+        text-align: left;
+    }
+
+    .data-table td {
+        padding: 16px 12px;
+        border-top: 1px solid rgba(147, 209, 255, .1);
+        vertical-align: middle;
+        font-size: .8rem;
+    }
+
+    .ticket {
+        color: #a9c4e5;
+        font-weight: 800;
+        font-size: .72rem;
+    }
+
+    .person {
+        color: #fff;
+        font-weight: 800;
+    }
+
+    .person small, .muted {
+        display: block;
+        color: #829ab9;
+        font-size: .71rem;
+        font-weight: 500;
+        margin-top: 4px;
+    }
+
+    .tag {
+        display: inline-block;
+        border-radius: 7px;
+        padding: 6px 8px;
+        font-size: .68rem;
+        font-weight: 800;
+    }
+
+    .tag-pickup {
+        color: #6fe1a5;
+        background: rgba(53, 203, 132, .12);
+    }
+
+    .tag-store {
+        color: #85c5ff;
+        background: rgba(73, 139, 255, .13);
+    }
+
+    .rating {
+        color: #ffd561;
+        font-weight: 800;
+    }
+
+    .delete-btn {
+        width: 33px;
+        height: 33px;
+        background: rgba(255, 98, 110, .09);
+        border: 1px solid rgba(255, 115, 126, .22);
+        border-radius: 9px;
+        color: #ff9ea7;
+        transition: 0.3s;
+    }
+
+    .delete-btn:hover {
+        background: #e84b59;
+        color: #fff;
+    }
+
+    .review-text {
+        color: #aabbd2;
+        max-width: 430px;
+        line-height: 1.55;
+    }
+
+    /* Modal Styling */
+    .modal-content {
+        background: #0c2341;
+        border: 1px solid rgba(128, 208, 255, .22);
+        color: #fff;
+        border-radius: 18px;
+    }
+
+    .form-control {
+        background: #07182d !important;
+        color: #fff !important;
+        border-color: rgba(147, 209, 255, .2) !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #56dcff, #4d82ff);
+        border: 0;
+        color: #061426;
+        font-weight: 800;
+    }
+
+    .btn-danger {
+        background: rgba(255, 98, 110, .12);
+        border: 1px solid rgba(255, 115, 126, .25);
+        color: #ffb4ba;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .admin-sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: auto;
+        }
+        .admin-brand {
+            margin: 0 20px 0 0;
+            white-space: nowrap;
+        }
+        .side-label {
+            display: none;
+        }
+        .side-link {
+            white-space: nowrap;
+            margin: 0;
+            padding: 9px;
+        }
+        .admin-main {
+            margin: 0;
+            padding: 22px;
+        }
+        .admin-sidebar .side-link:last-child {
+            margin-left: auto;
+        }
+    }
+
+    @media (max-width: 620px) {
+        .topbar {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        .profile-area {
+            width: 100%;
+            justify-content: flex-end;
+        }
+        .workspace {
+            padding: 17px;
+        }
+        .workspace-head {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        .search-box, .search-box input {
+            width: 100%;
+        }
+        .data-table {
+            min-width: 760px;
+        }
+    }
+</style>
+
+<div class="admin-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+        <a class="admin-brand" href="/">
+            <i class="fas fa-laptop-medical"></i> Repair OS
+        </a>
+
+        <span class="side-label">Workspace</span>
+        <a class="side-link active" href="/admin">
+            <i class="fas fa-grid-2"></i> Overview
+        </a>
+        <a class="side-link" href="#requests">
+            <i class="fas fa-inbox"></i> Service requests
+        </a>
+        <a class="side-link" href="#reviews">
+            <i class="fas fa-star"></i> Customer reviews
+        </a>
+
+        <span class="side-label mt-4">Website</span>
+        <a class="side-link" href="/" target="_blank">
+            <i class="fas fa-arrow-up-right-from-square"></i> View website
+        </a>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="admin-main">
+
+        <header class="topbar">
+            <div>
+                <h1>Good to see you, Mahesh.</h1>
+                <p>Here is a live view of your repair business.</p>
+            </div>
+            <div class="profile-area">
+                {% if has_dp %}
+                    <img src="{{ url_for('static', filename='uploads/admin_dp.jpg') }}?v={{ t }}" class="admin-dp" alt="Admin profile">
+                {% else %}
+                    <div class="admin-dp d-grid place-items-center"><i class="fas fa-user-shield"></i></div>
+                {% endif %}
+
+                <div class="me-2">
+                    <strong>Mahesh Kumar</strong>
+                    <span><i class="fas fa-circle"></i> Secure session</span>
+                </div>
+
+                <!-- Admin Profile Settings Button -->
+                <button class="icon-btn" data-bs-toggle="modal" data-bs-target="#profileModal" title="Admin Profile Settings">
+                    <i class="fas fa-gear"></i>
+                </button>
+
+                <!-- About Page Photo Upload Button -->
+                <button class="icon-btn" data-bs-toggle="modal" data-bs-target="#founderModal" title="Update About Page Photo">
+                    <i class="fas fa-id-badge"></i>
+                </button>
+
+                <form method="POST" action="/logout" style="margin: 0;">
+                    {{ csrf_field() }}
+                    <button class="icon-btn logout" title="Log out">
+                        <i class="fas fa-arrow-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
+        </header>
+
+        <!-- STATS METRICS -->
+        <section class="row g-4">
+            <div class="col-md-4">
+                <div class="metric-card" style="--icon:rgba(72,139,255,.16);--color:#73adff;--glow:#287cff">
+                    <div class="metric-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <small>Service requests</small>
+                    <strong>{{ bookings|length }}</strong>
+                    <span class="detail">All time</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric-card" style="--icon:rgba(178,113,255,.14);--color:#c69aff;--glow:#9a5cff">
+                    <div class="metric-icon"><i class="fas fa-message"></i></div>
+                    <small>Customer reviews</small>
+                    <strong>{{ feedbacks|length }}</strong>
+                    <span class="detail">Received</span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric-card" style="--icon:rgba(57,220,153,.13);--color:#72eab2;--glow:#23be76">
+                    <div class="metric-icon"><i class="fas fa-shield-halved"></i></div>
+                    <small>Workspace status</small>
+                    <strong style="font-size:1.55rem">Protected</strong>
+                    <span class="detail">All systems normal</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICE REQUESTS TABLE -->
+        <section class="workspace" id="requests">
+            <div class="workspace-head">
+                <div>
+                    <h2 class="workspace-title"><i class="fas fa-inbox text-info me-2"></i>Service requests</h2>
+                    <p class="workspace-sub">Latest customer repair requests</p>
+                </div>
+                <label class="search-box">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input id="bookingSearch" placeholder="Search requests">
+                </label>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table" id="bookingTable">
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th>Customer</th>
+                            <th>Device</th>
+                            <th>Service mode</th>
+                            <th>Issue & address</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td><span class="ticket">#GLR-{{ booking.id }}</span></td>
+                            <td>
+                                <span class="person">{{ booking.name }}</span>
+                                <small><a class="text-info text-decoration-none" href="tel:{{ booking.phone }}">{{ booking.phone }}</a></small>
+                            </td>
+                            <td>{{ booking.device }}</td>
+                            <td>
+                                {% if booking.service_mode == 'Home Pickup' %}
+                                    <span class="tag tag-pickup"><i class="fas fa-truck me-1"></i>Home pickup</span>
+                                {% else %}
+                                    <span class="tag tag-store"><i class="fas fa-store me-1"></i>Store visit</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="person">{{ booking.problem }}</div>
+                                <small>{{ booking.address }}</small>
+                            </td>
+                            <td>
+                                <form action="/delete_booking/{{ booking.id }}" method="POST" onsubmit="return confirm('Delete this request permanently?')" style="margin: 0;">
+                                    {{ csrf_field() }}
+                                    <button class="delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5 muted"><i class="fas fa-inbox fs-3 d-block mb-3"></i>No service requests yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CUSTOMER REVIEWS TABLE -->
+        <section class="workspace" id="reviews">
+            <div class="workspace-head">
+                <div>
+                    <h2 class="workspace-title"><i class="fas fa-star text-warning me-2"></i>Customer reviews</h2>
+                    <p class="workspace-sub">Feedback submitted from the website</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Review</th>
+                            <th>Rating</th>
+                            <th>Feedback</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fb in feedbacks %}
+                        <tr>
+                            <td>
+                                <span class="ticket">#FB-{{ fb.id }}</span>
+                                <span class="person d-block mt-2">{{ fb.name }}</span>
+                            </td>
+                            <td><span class="rating">{{ fb.rating }} <i class="fas fa-star"></i></span></td>
+                            <td><div class="review-text">“{{ fb.review }}”</div></td>
+                            <td>
+                                <form action="/delete_feedback/{{ fb.id }}" method="POST" onsubmit="return confirm('Delete this feedback permanently?')" style="margin: 0;">
+                                    {{ csrf_field() }}
+                                    <button class="delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 muted"><i class="fas fa-star fs-3 d-block mb-3"></i>No feedback received yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Admin Profile Update Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="fw-bold mb-0">Admin Dashboard Photo</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/update_dp" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <label class="form-label small text-white-50">PNG, JPG, JPEG or WEBP · Max 3 MB</label>
+                    <input class="form-control mb-3" type="file" name="profile_pic" accept=".png,.jpg,.jpeg,.webp" required>
+                    <button class="btn btn-primary w-100 py-2">Upload new photo</button>
+                </form>
+
+                {% if has_dp %}
+                <form action="/delete_dp" method="POST" class="mt-3">
+                    {{ csrf_field() }}
+                    <button class="btn btn-danger w-100">Remove profile photo</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Page Founder Update Modal -->
+<div class="modal fade" id="founderModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="fw-bold mb-0">About Page - Founder Photo</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/update_founder_dp" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <label class="form-label small text-white-50">Upload Mahesh's photo for the About Us page (PNG, JPG, WEBP)</label>
+                    <input class="form-control mb-3" type="file" name="founder_pic" accept=".png,.jpg,.jpeg,.webp" required>
+                    <button class="btn btn-primary w-100 py-2">Upload Founder Photo</button>
+                </form>
+
+                {% if has_founder_dp %}
+                <form action="/delete_founder_dp" method="POST" class="mt-3">
+                    {{ csrf_field() }}
+                    <button class="btn btn-danger w-100">Remove Founder Photo</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Script for Booking Table -->
+<script>
+    document.getElementById('bookingSearch').addEventListener('input', function() {
+        const q = this.value.toLowerCase();
+        document.querySelectorAll('#bookingTable tbody tr').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+    });
+</script>
+
+{% endblock %}

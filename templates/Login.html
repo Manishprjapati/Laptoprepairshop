@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+
+    /* PREMIUM GLOSSY DARK THEME UI               */
+    .login-section {
+        /* Deep Corporate Blue/Dark Gradient with Tech Background */
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 64, 175, 0.75)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 15px;
+    }
+
+    /* True Glassmorphism Effect */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.08); /* More transparent for glossy look */
+        backdrop-filter: blur(24px); /* High blur */
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.15); /* Thin glossy border */
+        border-radius: 24px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.2); /* 3D depth */
+        padding: 50px 40px;
+        width: 100%;
+        max-width: 450px;
+        transition: transform 0.3s ease;
+    }
+    .glass-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .glass-card h3 {
+        color: #ffffff;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+    }
+
+    .custom-input {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px solid transparent !important;
+        border-radius: 12px;
+        padding: 14px 20px 14px 45px;
+        font-weight: 500;
+        transition: 0.3s ease;
+    }
+    .custom-input:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.5) !important;
+    }
+
+    .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 18px;
+        transform: translateY(-50%);
+        color: #1e40af;
+        z-index: 10;
+        font-size: 1.1rem;
+    }
+
+    /* Sleek Professional Button */
+    .btn-glossy {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #fff;
+        font-weight: bold;
+        border-radius: 12px;
+        padding: 14px;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(29, 78, 216, 0.4);
+    }
+    .btn-glossy:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(29, 78, 216, 0.6);
+        color: #fff;
+    }
+
+    /* Hide unneccessary layout elements */
+    footer, .navbar, .bg-primary.py-2, .whatsapp-float { display: none !important; }
+</style>
+
+<div class="login-section">
+    <div class="glass-card text-center">
+
+        <div class="mb-4">
+            <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 75px; height: 75px; border: 3px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-user-shield fa-2x" style="color: #1d4ed8;"></i>
+            </div>
+        </div>
+
+        <h3 class="mb-1">Admin Portal</h3>
+        <p class="text-white-50 mb-4 small fw-bold text-uppercase" style="letter-spacing: 1px;">Secure Access</p>
+
+        {% if error %}
+        <div class="alert alert-danger bg-danger text-white border-0 fw-bold py-2 shadow-sm rounded-3" style="background: rgba(220, 53, 69, 0.9) !important; backdrop-filter: blur(5px);">
+            <i class="fas fa-times-circle me-2"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/login" method="POST">
+            {{ csrf_field() }}
+            <div class="position-relative mb-3 text-start">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" class="form-control custom-input" name="username" placeholder="Username" required autocomplete="off">
+            </div>
+
+            <div class="position-relative mb-2 text-start">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" class="form-control custom-input" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="text-end mb-4">
+                <a href="/forgot_password" class="text-white text-decoration-none small fw-bold" style="opacity: 0.9;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-glossy w-100 fs-5"><i class="fas fa-sign-in-alt me-2"></i> Login</button>
+        </form>
+
+        <div class="mt-4">
+            <a href="/" class="text-white-50 text-decoration-none small hover-white"><i class="fas fa-arrow-left me-1"></i> Back to Home</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,806 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    :root {
+        --ink: #071426;
+        --blue: #287cff;
+        --cyan: #4cddff;
+        --muted: #71809a;
+    }
+
+    .home-page {
+        overflow: hidden;
+        background: #f7f9fd;
+        color: var(--ink);
+    }
+
+    .hero-premium {
+        min-height: 790px;
+        position: relative;
+        isolation: isolate;
+        color: #fff;
+        background: radial-gradient(circle at 75% 26%, #1b6bc2 0, transparent 27%), radial-gradient(circle at 18% 80%, #183e83 0, transparent 35%), linear-gradient(125deg, #061321 0%, #09264a 54%, #071528 100%);
+    }
+
+    .hero-premium:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: .25;
+        background-image: linear-gradient(rgba(135, 202, 255, .15) 1px, transparent 1px), linear-gradient(90deg, rgba(135, 202, 255, .15) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: linear-gradient(to bottom, #000, transparent);
+    }
+
+    .hero-premium:after {
+        content: "";
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border: 1px solid rgba(111, 218, 255, .18);
+        border-radius: 50%;
+        right: -260px;
+        top: -260px;
+        z-index: -1;
+        box-shadow: 0 0 0 80px rgba(72, 168, 255, .035), 0 0 0 160px rgba(72, 168, 255, .025);
+    }
+
+    .hero-inner {
+        min-height: 790px;
+        display: flex;
+        align-items: center;
+        padding: 110px 0 75px;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: #b8eaff;
+        font-weight: 700;
+        font-size: .77rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+    }
+
+    .eyebrow i {
+        color: var(--cyan);
+        font-size: .55rem;
+    }
+
+    .hero-copy h1 {
+        max-width: 650px;
+        font-size: clamp(3rem, 5.2vw, 5.7rem);
+        line-height: .98;
+        letter-spacing: -.06em;
+        font-weight: 800;
+        margin: 19px 0 24px;
+    }
+
+    .hero-copy h1 em {
+        font-style: normal;
+        color: var(--cyan);
+    }
+
+    .hero-copy>p {
+        max-width: 530px;
+        font-size: 1.08rem;
+        line-height: 1.75;
+        color: #b7c8df;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+    }
+
+    .button-main,
+    .button-ghost {
+        padding: 15px 23px;
+        border-radius: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: .3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .button-main {
+        background: linear-gradient(135deg, var(--cyan), #5795ff);
+        color: #031223;
+        box-shadow: 0 12px 28px rgba(75, 198, 255, .25);
+    }
+
+    .button-main:hover {
+        color: #031223;
+        transform: translateY(-3px);
+        box-shadow: 0 18px 36px rgba(75, 198, 255, .38);
+    }
+
+    .button-ghost {
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, .25);
+        background: rgba(255, 255, 255, .06);
+    }
+
+    .button-ghost:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, .13);
+        transform: translateY(-3px);
+    }
+
+    .hero-proof {
+        display: flex;
+        gap: 24px;
+        margin-top: 45px;
+        padding-top: 23px;
+        border-top: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .hero-proof strong {
+        display: block;
+        font-size: 1.2rem;
+    }
+
+    .hero-proof span {
+        color: #9db0ca;
+        font-size: .78rem;
+    }
+
+    .laptop-scene {
+        height: 590px;
+        position: relative;
+        display: grid;
+        place-items: center;
+        perspective: 1200px;
+    }
+
+    .laptop-glow {
+        position: absolute;
+        width: 400px;
+        height: 310px;
+        border-radius: 50%;
+        background: #2eb6ff;
+        filter: blur(100px);
+        opacity: .34;
+    }
+
+    .laptop {
+        width: min(540px, 100%);
+        position: relative;
+        transform: rotateY(-16deg) rotateX(7deg) rotateZ(-2deg);
+        transform-style: preserve-3d;
+        transition: transform .2s linear;
+        filter: drop-shadow(35px 45px 28px rgba(0, 0, 0, .34));
+    }
+
+    .laptop-screen {
+        position: relative;
+        aspect-ratio: 1.56;
+        padding: 13px;
+        border-radius: 18px 18px 7px 7px;
+        background: linear-gradient(145deg, #eaf6ff, #6b788b 5%, #101c2d 9%, #26364b 92%, #c1d5e5);
+        box-shadow: inset 0 0 3px #fff;
+    }
+
+    .screen-art {
+        height: 100%;
+        border-radius: 8px 8px 2px 2px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(140deg, #071b38 3%, #126cb6 43%, #39c6ef 43.5%, #0b2f65 70%);
+    }
+
+    .screen-art:before {
+        content: "";
+        position: absolute;
+        height: 150%;
+        width: 30%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
+        transform: rotate(28deg);
+        left: -25%;
+        top: -20%;
+        animation: screenShine 4.5s infinite;
+    }
+
+    .screen-ui {
+        position: absolute;
+        inset: 15%;
+        display: grid;
+        grid-template-columns: 1fr 1.35fr;
+        gap: 11px;
+        opacity: .83;
+    }
+
+    .screen-ui span {
+        background: rgba(255, 255, 255, .18);
+        border: 1px solid rgba(255, 255, 255, .25);
+        border-radius: 5px;
+    }
+
+    .screen-ui span:first-child {
+        grid-row: span 2;
+    }
+
+    .screen-ui span:last-child {
+        width: 62%;
+    }
+
+    .laptop-base {
+        width: 112%;
+        height: 29px;
+        margin-left: -6%;
+        background: linear-gradient(#cadce8, #73879c 20%, #e9f5fa 70%, #53677c 72%);
+        border-radius: 3px 3px 35px 35px;
+        transform: perspective(300px) rotateX(50deg);
+        transform-origin: top;
+        position: relative;
+    }
+
+    .laptop-base:after {
+        content: "";
+        position: absolute;
+        width: 27%;
+        height: 7px;
+        background: #45566b;
+        border-radius: 0 0 8px 8px;
+        left: 36%;
+        top: 6px;
+    }
+
+    .float-tag {
+        position: absolute;
+        z-index: 2;
+        padding: 12px 15px;
+        border-radius: 11px;
+        background: rgba(10, 28, 53, .72);
+        border: 1px solid rgba(152, 225, 255, .28);
+        color: #eaf8ff;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+        font-size: .84rem;
+        font-weight: 600;
+        animation: float 4.2s ease-in-out infinite;
+    }
+
+    .float-tag i {
+        color: var(--cyan);
+        margin-right: 7px;
+    }
+
+    .tag-one {
+        top: 16%;
+        right: 2%;
+    }
+
+    .tag-two {
+        bottom: 15%;
+        left: 0;
+        animation-delay: -2s;
+    }
+
+    .scroll-cue {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #98acc8;
+        font-size: .72rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+    }
+
+    .scroll-cue:after {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 33px;
+        background: var(--cyan);
+        margin: 10px auto 0;
+        animation: scrollLine 1.8s infinite;
+    }
+
+    .trust-strip {
+        background: #fff;
+        border-bottom: 1px solid #e8eef6;
+    }
+
+    .trust-strip .item {
+        padding: 24px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #40516b;
+        font-size: .84rem;
+        font-weight: 700;
+    }
+
+    .trust-strip i {
+        color: var(--blue);
+        font-size: 1.25rem;
+    }
+
+    .section-space {
+        padding: 115px 0;
+    }
+
+    .section-label {
+        color: #2678ed;
+        font-size: .75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .16em;
+    }
+
+    .section-title {
+        font-size: clamp(2.1rem, 4vw, 3.65rem);
+        letter-spacing: -.05em;
+        font-weight: 800;
+        margin: 13px 0;
+        color: var(--ink);
+    }
+
+    .section-intro {
+        color: var(--muted);
+        font-size: 1.04rem;
+        line-height: 1.75;
+        max-width: 580px;
+    }
+
+    .service-panel {
+        background: #fff;
+        border: 1px solid #e8edf4;
+        border-radius: 20px;
+        padding: 27px;
+        height: 100%;
+        transition: .35s;
+    }
+
+    .service-panel:hover {
+        transform: translateY(-8px);
+        border-color: #bce2ff;
+        box-shadow: 0 20px 35px rgba(18, 83, 150, .11);
+    }
+
+    .service-icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 15px;
+        background: #eaf5ff;
+        color: #1671e9;
+        font-size: 1.3rem;
+        margin-bottom: 23px;
+    }
+
+    .service-panel h3 {
+        font-size: 1.1rem;
+        font-weight: 800;
+    }
+
+    .service-panel p {
+        font-size: .9rem;
+        color: var(--muted);
+        line-height: 1.65;
+    }
+
+    .service-link {
+        color: #1671e9;
+        text-decoration: none;
+        font-size: .85rem;
+        font-weight: 800;
+    }
+
+    .service-link i {
+        transition: .2s;
+        margin-left: 3px;
+    }
+
+    .service-link:hover i {
+        transform: translateX(4px);
+    }
+
+    .process-section {
+        background: var(--ink);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .process-section:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 72% 60%, #155dc5, transparent 25%);
+        opacity: .5;
+    }
+
+    .process-section .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .process-section .section-title {
+        color: #fff;
+    }
+
+    .process-section .section-intro {
+        color: #a9bdd6;
+    }
+
+    .process-step {
+        position: relative;
+        padding: 24px 20px;
+        border-left: 1px solid rgba(125, 198, 255, .3);
+    }
+
+    .process-step b {
+        color: var(--cyan);
+        font-size: .75rem;
+        letter-spacing: .12em;
+    }
+
+    .process-step h3 {
+        font-size: 1.15rem;
+        margin: 11px 0;
+    }
+
+    .process-step p {
+        color: #9db0c8;
+        font-size: .9rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .cta-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #edf7ff, #fff);
+    }
+
+    .cta-box {
+        padding: clamp(34px, 7vw, 76px);
+        border-radius: 25px;
+        background: linear-gradient(120deg, #0d2850, #1766b9);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-box:after {
+        content: "";
+        position: absolute;
+        width: 390px;
+        height: 390px;
+        border-radius: 50%;
+        right: -140px;
+        top: -180px;
+        border: 1px solid rgba(255, 255, 255, .22);
+        box-shadow: 0 0 0 35px rgba(255, 255, 255, .05), 0 0 0 70px rgba(255, 255, 255, .04);
+    }
+
+    .cta-box h2 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -.05em;
+        max-width: 650px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-box p {
+        color: #c2ddf7;
+        max-width: 560px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-box .button-main {
+        position: relative;
+        z-index: 1;
+    }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* BRAND SECTION STYLING */
+    .brands-section {
+        padding: 90px 0;
+        background: #f4f9ff;
+    }
+
+    .brand-card {
+        height: 90px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, .72);
+        border: 1px solid #dcebf8;
+        border-radius: 18px;
+        box-shadow: 0 10px 28px rgba(19, 70, 130, .07);
+        position: relative;
+        overflow: hidden;
+        transition: .35s;
+    }
+
+    .brand-card:before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -40%;
+        width: 38%;
+        height: 200%;
+        transform: rotate(25deg);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .95), transparent);
+        transition: .6s;
+    }
+
+    .brand-card:hover:before {
+        left: 120%;
+    }
+
+    .brand-card:hover {
+        transform: translateY(-7px);
+        border-color: #70c5ff;
+        box-shadow: 0 20px 35px rgba(19, 100, 210, .16);
+    }
+
+    .brand-card img {
+        max-width: 120px;
+        width: auto;
+        max-height: 48px;
+        object-fit: contain;
+        filter: grayscale(1);
+        opacity: .66;
+        transition: .35s;
+    }
+
+    .brand-card:hover img {
+        filter: grayscale(0);
+        opacity: 1;
+        transform: scale(1.08);
+    }
+
+    .brand-fallback {
+        display: none;
+        align-items: center;
+        gap: 9px;
+        color: #0b2548;
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: -.05em;
+    }
+
+    .brand-fallback i {
+        color: #247cff;
+        font-size: 1.35rem;
+    }
+
+    .brands-section .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    @keyframes float {
+        50% {
+            transform: translateY(-13px);
+        }
+    }
+
+    @keyframes screenShine {
+        0%, 35% { left: -35%; }
+        70%, 100% { left: 110%; }
+    }
+
+    @keyframes scrollLine {
+        0% { transform: scaleY(0); transform-origin: top; }
+        50% { transform: scaleY(1); transform-origin: top; }
+        51% { transform-origin: bottom; }
+        100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @media(max-width:991px) {
+        .hero-premium,
+        .hero-inner { min-height: auto; }
+        .hero-inner { padding: 90px 0 55px; }
+        .laptop-scene { height: 440px; }
+        .laptop { max-width: 460px; }
+        .hero-copy { text-align: center; }
+        .hero-copy>p { margin-inline: auto; }
+        .hero-actions,
+        .hero-proof { justify-content: center; }
+        .scroll-cue { display: none; }
+        .section-space { padding: 80px 0; }
+    }
+
+    @media(max-width:575px) {
+        .hero-proof { gap: 15px; }
+        .hero-proof strong { font-size: 1rem; }
+        .laptop-scene { height: 300px; }
+        .float-tag { font-size: .7rem; padding: 9px; }
+        .tag-one { right: -8px; }
+        .tag-two { left: -8px; }
+        .section-space { padding: 65px 0; }
+        .trust-strip .item { justify-content: start; padding: 13px 20px; }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+        *, *:before, *:after {
+            animation: none !important;
+            transition: none !important;
+        }
+        .reveal { opacity: 1; transform: none; }
+    }
+</style>
+
+<main class="home-page">
+    <section class="hero-premium">
+        <div class="container hero-inner">
+            <div class="row align-items-center w-100 g-3">
+                <div class="col-lg-6 hero-copy"><span class="eyebrow"><i class="fas fa-circle"></i> Ghaziabad's trusted
+                        tech care</span>
+                    <h1>Your device, back to <em>brilliant.</em></h1>
+                    <p>Expert laptop, PC and gadget repair with honest diagnosis, Best quality parts and convenient
+                        doorstep
+                        support across Delhi-NCR.</p>
+                    <div class="hero-actions"><a class="button-main" href="/contact">Book a repair <i
+                                class="fas fa-arrow-right"></i></a><a class="button-ghost" href="#services"><i
+                                class="fas fa-play"></i> Explore services</a></div>
+                    <div class="hero-proof">
+                        <div><strong>20+ years</strong><span>Technical expertise</span></div>
+                        <div><strong>Same-day</strong><span>Priority diagnosis</span></div>
+                        <div><strong>100%</strong><span>Transparent pricing</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="laptop-scene">
+                        <div class="laptop-glow"></div>
+                        <div class="float-tag tag-one"><i class="fas fa-shield-halved"></i> Quality checked</div>
+                        <div class="float-tag tag-two"><i class="fas fa-bolt"></i> Fast turnaround</div>
+                        <div class="laptop" id="heroLaptop">
+                            <div class="laptop-screen">
+                                <div class="screen-art">
+                                    <div class="screen-ui"><span></span><span></span><span></span><span></span></div>
+                                </div>
+                            </div>
+                            <div class="laptop-base"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-cue">Scroll to explore</div>
+    </section>
+
+    <section class="trust-strip">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 item"><i class="fas fa-truck-fast"></i> Doorstep pickup & delivery</div>
+                <div class="col-md-4 item"><i class="fas fa-microchip"></i> Chip-level repair specialists</div>
+                <div class="col-md-4 item"><i class="fas fa-award"></i> Best quality parts & 30 days service warranty</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-space">
+        <div class="container">
+            <div class="row justify-content-between align-items-end mb-5">
+                <div class="col-lg-7 reveal"><span class="section-label">What we fix</span>
+                    <h2 class="section-title">Precision care for every screen, circuit & system.</h2>
+                </div>
+                <div class="col-lg-4 reveal">
+                    <p class="section-intro">From a slow laptop to complex motherboard faults, our technicians diagnose
+                        the real issue first and repair it with care.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                {% for service in services %}
+                <div class="col-lg-3 col-md-6 reveal">
+                    <article class="service-panel">
+                        <div class="service-icon"><i class="{{ service.icon }}"></i></div>
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.desc }}</p><a class="service-link" href="/service/{{ service.slug }}">Learn more
+                            <i class="fas fa-arrow-right"></i></a>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section section-space">
+        <div class="container">
+            <div class="row align-items-end mb-5">
+                <div class="col-lg-7 reveal"><span class="section-label text-info">Simple by design</span>
+                    <h2 class="section-title">A better repair experience from first call to final check.</h2>
+                </div>
+                <div class="col-lg-4 reveal">
+                    <p class="section-intro">No confusing process. Just clear updates and dependable work.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                {% for number,title,text in [('01','Tell us the issue','Share your device problem online or call us directly.'),('02','Get an expert diagnosis','We inspect the device and explain the best repair route.'),('03','Approve with confidence','Receive transparent pricing before any work begins.'),('04','Back to doing more','We test every repair carefully before handover.')] %}
+                <div class="col-lg-3 col-md-6 reveal">
+                    <div class="process-step"><b>{{ number }}</b>
+                        <h3>{{ title }}</h3>
+                        <p>{{ text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box reveal"><span class="eyebrow">Need help today?</span>
+                <h2>Get your tech working like it should.</h2>
+                <p class="my-4">Book a repair request in minutes. Our team will get in touch to understand the issue and
+                    arrange the next step.</p><a class="button-main" href="/contact">Schedule a repair <i
+                        class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRANDS SECTION (4 UP, 4 DOWN GRID) -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <span class="section-label">Brands we support</span>
+                <h2 class="section-title">Trusted repair across leading brands.</h2>
+            </div>
+
+            <div class="row g-3 justify-content-center row-cols-2 row-cols-md-3 row-cols-lg-4">
+                {% for brand,logo in [('HP','hp.svg'),('Dell','dell.svg'),('Lenovo','lenovo.svg'),('ASUS','asus.svg'),('Acer','acer.svg'),('Apple','apple.svg'),('Canon','canon.svg'),('Epson','epson.svg')] %}
+                <div class="col reveal">
+                    <div class="brand-card">
+                        <img src="{{ url_for('static', filename='brands/' ~ logo) }}" alt="{{ brand }} logo" loading="lazy">
+                        <span class="brand-fallback"><i class="fas fa-laptop"></i>{{ brand }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE GOOGLE REVIEWS SECTION (JotForm Widget) -->
+    <section class="review-section-home" style="padding: 25px 0 50px; background: #f8f9fa;">
+        <div class="container text-center">
+             <!-- The Live Review Widget -->
+             <div class="reveal">
+                 <div id="JFWebsiteWidget-01a0430cb7707000835770a5e46128d8ee4b"></div>
+                 <script src="https://www.jotform.com/website-widgets/embed/01a0430cb7707000835770a5e46128d8ee4b"></script>
+             </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // Laptop Animation Script
+    const laptop = document.getElementById('heroLaptop');
+    window.addEventListener('scroll', () => {
+        const y = Math.min(window.scrollY, 600);
+        laptop.style.transform = `rotateY(${-16 + y * .015}deg) rotateX(${7 - y * .007}deg) rotateZ(${-2 + y * .006}deg) translateY(${y * .09}px)`;
+    }, { passive: true });
+
+    // Scroll Reveal Script
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(item => observer.observe(item));
+</script>
+{% endblock %}
