@@ -90,7 +90,6 @@
         .contact-line { display:flex; gap:12px; margin:0 0 15px; color:#aac0d9; font-size:.8rem; line-height:1.55; }
         .contact-line i { color:#63dbff; margin-top:3px; }
 
-        /* Premium Tagline Design */
         .footer-tagline {
             font-size: 0.8rem;
             font-weight: 700;
@@ -101,11 +100,7 @@
             margin-bottom: 22px;
             padding-left: 5px;
         }
-        .footer-tagline span {
-            color: #4cddff;
-            margin: 0 8px;
-            font-size: 0.9rem;
-        }
+        .footer-tagline span { color: #4cddff; margin: 0 8px; font-size: 0.9rem; }
 
         .social-link { display:inline-grid; place-items:center; width:38px; height:38px; border:1px solid rgba(163,226,255,.18); border-radius:10px; margin-right:7px; color:#c7e9ff; text-decoration:none; background:rgba(255,255,255,.05); transition:.25s; }
         .social-link:hover { color:#061426; background:#6de0ff; transform:translateY(-3px); }
@@ -116,23 +111,14 @@
 
         /* FLOATING TOAST NOTIFICATIONS */
         .flash-stack {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            z-index: 999999;
-            min-width: 300px;
-            max-width: 400px;
-            pointer-events: none;
+            position: fixed; top: 25px; right: 25px; z-index: 999999;
+            min-width: 300px; max-width: 400px; pointer-events: none;
         }
         .flash-stack .alert {
-            pointer-events: auto;
-            border-radius: 12px;
-            border: none;
+            pointer-events: auto; border-radius: 12px; border: none;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
             animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            display: flex;
-            align-items: center;
-            font-weight: 600;
+            display: flex; align-items: center; font-weight: 600;
         }
         .flash-stack .alert .btn-close { margin-left: auto; }
         @keyframes slideInRight {
@@ -143,29 +129,25 @@
 </head>
 <body class="bg-light">
 
-    <!-- Top Contact Bar -->
-    <div class="bg-primary text-white py-2">
-        <div class="container d-flex justify-content-between align-items-center">
+    <!-- Top Contact Bar (FIXED FOR MOBILE VIEW) -->
+    <div class="bg-primary text-white py-1 py-md-2">
+        <div class="container d-flex flex-wrap justify-content-center justify-content-md-between align-items-center gap-2">
             <small>
                 <a href="mailto:ghaziabadlaptoprepair@gmail.com" class="text-white text-decoration-none">
-                    <i class="fas fa-envelope"></i> ghaziabadlaptoprepair@gmail.com
+                    <i class="fas fa-envelope me-1"></i> ghaziabadlaptoprepair@gmail.com
                 </a>
             </small>
-            <div>
-                <!-- CLICK-TO-CALL -->
-                <small class="me-3">
-                    <a href="tel:+919650314444" class="text-white text-decoration-none">
-                        <i class="fas fa-phone-alt"></i> Call: +91-9650314444
-                    </a>
-                </small>
-            </div>
+            <small>
+                <a href="tel:+919650314444" class="text-white text-decoration-none fw-bold">
+                    <i class="fas fa-phone-alt me-1"></i> Call: +91-9650314444
+                </a>
+            </small>
         </div>
     </div>
 
     <!-- Main Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
         <div class="container">
-            <!-- NAVBAR LOGO IMAGE -->
             <a class="navbar-brand" href="/">
                 <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Ghaziabad Laptop Repair"
                      style="height: 48px; object-fit: contain; transition: 0.3s ease; border-radius: 6px;"
@@ -173,7 +155,6 @@
                      onmouseout="this.style.transform='scale(1)'">
             </a>
 
-            <!-- Mobile Menu Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -182,8 +163,6 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/about">About Us</a></li>
-
-                    <!-- DROPDOWN MENU -->
                     <li class="nav-item dropdown">
                         <a class="nav-link text-white dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Services
@@ -199,7 +178,6 @@
                             <li><a class="dropdown-item" href="/service/accessories"><i class="fas fa-keyboard"></i> Accessories</a></li>
                         </ul>
                     </li>
-
                     <li class="nav-item"><a class="nav-link text-white" href="/feedback">Feedback</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact Us</a></li>
                     <li class="nav-item ms-3 mt-2 mt-lg-0"><a class="btn btn-warning fw-bold" href="/contact">Book Repair</a></li>
@@ -210,7 +188,6 @@
 
     <!-- Page Content Area -->
     <div>
-        <!-- FLOATING NOTIFICATIONS -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             <div class="flash-stack">
@@ -235,22 +212,17 @@
     <!-- Glossy Footer -->
     <footer class="glossy-footer">
         <div class="container">
-
             <div class="footer-intro row align-items-center">
                 <div class="col-lg-7">
-                    <!-- FOOTER LOGO IMAGE -->
                     <a href="/" style="display: block; margin-bottom: 0;">
                         <img src="{{ url_for('static', filename='images/banner.png') }}" alt="Ghaziabad Laptop Repair"
                              style="height: 65px; object-fit: contain; transition: 0.3s ease; border-radius: 8px;"
                              onmouseover="this.style.transform='scale(1.05)'"
                              onmouseout="this.style.transform='scale(1)'">
                     </a>
-
-                    <!-- NEW PREMIUM TAGLINE -->
                     <div class="footer-tagline">
                         REPAIR <span>•</span> UPGRADE <span>•</span> SUPPORT
                     </div>
-
                     <div>
                         <a class="social-link" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a class="social-link" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -298,7 +270,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="footer-bottom">
@@ -317,7 +288,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Auto-Dismiss Script for Notifications -->
     <script>
         setTimeout(() => {
             const alerts = document.querySelectorAll('.flash-stack .alert');
@@ -327,6 +297,5 @@
             });
         }, 4000);
     </script>
-
 </body>
 </html>
